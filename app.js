@@ -1,30 +1,34 @@
 let express=require('express');
 let app=express();//you will get the access to the method.
  let dotEnv=require('dotenv');
-
   dotEnv.config();
 // let port =process.env.PORT ||6300;
-
 let port =6200;
 
-
-//default routes
+let CategoryRouter=require('./src/controller/CategoryRouter');
+let ProductRouter=require('./src/controller/ProductRouter');
 
 app.get('/',(req,res)=>{
 
-    res.send("Hello world!");
+  res.send("Hello iam from express");
 })
 
-app.get('/test',(req,res)=>{
+app.use('/category',CategoryRouter);
 
-    res.send("test route!");
-})
+app.use('/product',ProductRouter);
+
+// app.listen(port,(err)=>{
+
+//   if(err) throw err;
+//   else{
+
+//     console.log("server started at the port ",port);
+//   }
+// })
 
 app.listen(port,(err)=>{
-
     if(err)throw err;
     else{
-
         console.log("server is started on port ",port);
     }
 })
